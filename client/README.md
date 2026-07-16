@@ -18,6 +18,11 @@ A modern and responsive e-commerce frontend built with React.js, Vite, Redux Too
 
 ---
 
+## admin-login- access
+
+## gmail - test123@gmail.com
+## password - password
+
 ## 📂 Features
 
 ### 👤 User
