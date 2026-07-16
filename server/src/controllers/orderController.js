@@ -1,6 +1,6 @@
-import Order from "../../models/Order.js";
-import Cart from "../../models/Cart.js";
-import Product from "../../models/Product.js";
+import Order from "../models/Order.js";
+import Cart from "../models/Cart.js";
+import Product from "../models/Product.js";
 
 /* ==========================================================
    CREATE ORDER
@@ -75,7 +75,10 @@ export const createOrder = async (req, res) => {
 
         title: product.title,
 
-        image: product.images[0]?.url || "",
+        image:
+          product.images?.length > 0
+            ? product.images[0].url
+            : "https://placehold.co/100x100",
 
         price,
 
@@ -117,24 +120,7 @@ export const createOrder = async (req, res) => {
       orderStatus: "Pending",
     });
 
-    /* ---------------- Reduce Product Stock ---------------- */
-
-    for (const item of cart.items) {
-      await Product.findByIdAndUpdate(item.product._id, {
-        $inc: {
-          stock: -item.quantity,
-        },
-      });
-    }
-
-    /* ---------------- Clear Cart ---------------- */
-
-    cart.items = [];
-    cart.totalItems = 0;
-    cart.totalAmount = 0;
-
-    await cart.save();
-
+ 
     /* ---------------- Populate ---------------- */
 
     await order.populate([
@@ -147,6 +133,7 @@ export const createOrder = async (req, res) => {
         select: "title slug",
       },
     ]);
+    
 
     /* ---------------- Response ---------------- */
 

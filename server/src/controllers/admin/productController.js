@@ -1,3 +1,4 @@
+import  imageUploadUtil  from "../../utils/cloudinaryUpload.js";
 import slugify from "slugify";
 
 import Product from "../../models/Product.js";
@@ -5,7 +6,6 @@ import Category from "../../models/Category.js";
 import Brand from "../../models/Brand.js";
 import cloudinary from "../../config/cloudinary.js";
 
-import { imageUploadUtil } from "../../utils/cloudinaryUpload.js";
 
 
 export const createProduct = async (req, res) => {
@@ -117,6 +117,10 @@ export const createProduct = async (req, res) => {
   }
 };
 
+
+
+
+
 /* ==========================================================
    UPDATE PRODUCT
 ========================================================== */
@@ -210,32 +214,17 @@ export const updateProduct = async (req, res) => {
 
     /* ---------------- Update Product ---------------- */
 
-    product.title = title || product.title;
 
-    product.description =
-      description || product.description;
-
-    product.price =
-      price || product.price;
-
-    product.discountPrice =
-      discountPrice || product.discountPrice;
-
-    product.stock =
-      stock || product.stock;
-
-    product.category =
-      category || product.category;
-
-    product.brand =
-      brand || product.brand;
-
-    product.featured =
-      featured ?? product.featured;
-
-    product.isActive =
-      isActive ?? product.isActive;
-
+      
+      product.title = title ?? product.title;
+      product.description = description ?? product.description;
+      product.price = price ?? product.price;
+      product.discountPrice = discountPrice ?? product.discountPrice;
+      product.category = category ?? product.category;
+      product.stock = stock ?? product.stock;
+   product.brand = brand ?? product.brand;
+   product.featured = featured ?? product.featured;
+   product.isActive = isActive ?? product.isActive;
 
     product.images = images;
 
@@ -257,6 +246,33 @@ export const updateProduct = async (req, res) => {
       error
     );
 
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+/* ==========================================================
+   GETADMIN PRODUCT
+========================================================== */
+
+export const getAdminProducts = async (req, res) => {
+  try {
+    const products = await Product.find()
+      .populate("category", "name")
+      .populate("brand", "name")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: products.length,
+      products,
+    });
+  } catch (error) {
+    console.error(error);
 
     return res.status(500).json({
       success: false,

@@ -70,14 +70,9 @@ const orderSchema = new Schema(
         required: true,
       },
 
-      addressLine1: {
+      address: {
         type: String,
         required: true,
-      },
-
-      addressLine2: {
-        type: String,
-        default: "",
       },
 
       landmark: {

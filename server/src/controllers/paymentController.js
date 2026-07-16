@@ -1,8 +1,8 @@
 import crypto from "crypto";
 import razorpay from "../config/razorpay.js";
 import Order from "../models/Order.js";
-
-
+import Product from "../models/Product.js";
+import Cart from "../models/Cart.js";
 
 
 /* ==========================================================
@@ -120,8 +120,7 @@ export const verifyPayment = async (req, res) => {
 
     /* ---------------- Verify Signature ---------------- */
 
-    const body =
-      razorpay_order_id + "|" + razorpay_payment_id;
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -143,12 +142,37 @@ export const verifyPayment = async (req, res) => {
 
     await order.save();
 
+    /* ---------------- Reduce Product Stock ---------------- */
+
+    for (const item of order.orderItems) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: {
+          stock: -item.quantity,
+        },
+      });
+    }
+
+    /* ---------------- Clear Cart ---------------- */
+
+    const cart = await Cart.findOne({
+      user: order.user,
+    });
+
+    if (cart) {
+      cart.items = [];
+      cart.totalItems = 0;
+      cart.totalAmount = 0;
+
+      await cart.save();
+    }
+
+
+
     return res.status(200).json({
       success: true,
       message: "Payment verified successfully",
       order,
     });
-
   } catch (error) {
     console.error("Verify Payment Error:", error);
 

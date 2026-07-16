@@ -1,6 +1,11 @@
 import { Router} from "express";
 
-import {createProduct, updateProduct, deleteProduct,} from "../controllers/admin/productController.js";
+import {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getAdminProducts,
+} from "../controllers/admin/productController.js";
 
 import {
   getAllProducts,
@@ -28,4 +33,8 @@ productRouter.put("/:id", protect,adminOnly,upload.array("images", 5),updateProd
 
 productRouter.delete("/:id", protect, adminOnly, deleteProduct);
 
+productRouter.get("/admin/all", protect, adminOnly, getAdminProducts);
+
 export default productRouter;
+
+

@@ -1,16 +1,192 @@
-# React + Vite
+# ShopSphere Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive e-commerce frontend built with React.js, Vite, Redux Toolkit, and Tailwind CSS. It provides a seamless shopping experience with authentication, product browsing, cart, wishlist, checkout, Razorpay payment integration, and a complete admin panel.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tech Stack
 
-## React Compiler
+- React.js
+- Vite
+- Redux Toolkit & RTK Query
+- React Router DOM
+- Tailwind CSS
+- React Hot Toast
+- React Icons
+- Razorpay Checkout
+- Axios
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📂 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👤 User
+
+- User Registration & Login
+- JWT Authentication
+- Refresh Token Support
+- Profile Management
+- Protected Routes
+
+---
+
+### 🛍 Products
+
+- Product Listing
+- Product Details
+- Search Products
+- Category Filter
+- Brand Filter
+- Price Display
+- Featured Products
+- Responsive Product Cards
+
+---
+
+### ❤️ Wishlist
+
+- Add to Wishlist
+- Remove from Wishlist
+- Wishlist Page
+- Wishlist Counter
+
+---
+
+### 🛒 Cart
+
+- Add to Cart
+- Update Quantity
+- Remove Product
+- Clear Cart
+- Cart Summary
+
+---
+
+### 💳 Checkout
+
+- Shipping Address
+- Cash on Delivery
+- Razorpay Payment Gateway
+- Order Creation
+- Payment Verification
+
+---
+
+### 📦 Orders
+
+- My Orders
+- Order Details
+- Cancel Order
+- Payment Status
+- Order Status
+
+---
+
+## 👨‍💼 Admin Panel
+
+### Dashboard
+
+- Dashboard Layout
+- Sidebar Navigation
+
+### Products
+
+- View Products
+- Create Product
+- Edit Product
+- Delete Product
+- Product Status
+- Featured Products
+
+### Categories
+
+- Add Category
+- Edit Category
+- Delete Category
+
+### Brands
+
+- Add Brand
+- Edit Brand
+- Delete Brand
+
+### Orders
+
+- View Orders
+- Update Order Status
+- View Customer Details
+- View Shipping Address
+- View Ordered Products
+
+---
+
+## 📁 Project Structure
+
+```
+src
+│
+├── assets
+├── components
+│   ├── admin
+│   ├── common
+│   └── user
+│
+├── layouts
+├── pages
+│   ├── admin
+│   └── user
+│
+├── routes
+├── services
+│   ├── admin
+│   ├── auth
+│   ├── cart
+│   ├── wishlist
+│   ├── order
+│   ├── payment
+│   ├── product
+│   ├── category
+│   └── brand
+│
+├── store
+├── utils
+└── App.jsx
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/arunjo96/shopSpare-E-commerce.git
+```
+
+---
+
+
+## ✨ UI Highlights
+
+- Responsive Design
+- Modern Dashboard
+- Drawer Forms
+- Toast Notifications
+- Protected Admin Routes
+- Clean UI using Tailwind CSS
+
+---
+
+## 📦 Build
+
+```bash
+npm run build
+```
+
+---
+
+## 👨‍💻 Author
+
+**Arunkumar V**
+
+Full Stack MERN Developer

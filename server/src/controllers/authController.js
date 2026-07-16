@@ -109,6 +109,12 @@ export const login = async (req, res) => {
       success: true,
       message: "Login successful",
       accessToken,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -311,6 +317,12 @@ export const refreshToken = async (req, res) => {
     return res.status(200).json({
       success: true,
       accessToken: newAccessToken,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
 
   } catch (error) {
